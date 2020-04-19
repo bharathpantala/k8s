@@ -21,7 +21,8 @@ Building the containers:
 Execute the kubermetes definitions:
 ----------------------------------
 
-         1. Goto <repo>/nginx-proxy-nodejs/ directory and execute the below scripts.
+         1. Goto <repo>/nginx-proxy-nodejs/ directory and change the image names in appnode.yaml
+	 Then execute the below scripts.
          
          
          ### $ kubectl create -f appnode.yaml
