@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: appinfo
+  labels:
+    app: appinfo
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: appinfo
+    tier: frontend
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appinfo
+  labels:
+    app: appinfo
+spec:
+  selector:
+    matchLabels:
+      app: appinfo
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: appinfo
+        tier: frontend
+    spec:
+      containers:
+      - image: bharathpantala/appinfo:1.0
+        name: appinfo
+        env:
+        - name: DB_HOST
+          value: "wordpress-mysql"
+        - name: DB_PWD
+          value: "Sharath10@"
+        - name: DB_NAME
+          value: "appinfo"
+        ports:
+        - containerPort: 8080
+          name: appinfo
